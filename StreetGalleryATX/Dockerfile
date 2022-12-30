@@ -18,4 +18,4 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 #lanuch 
 ENTRYPOINT ["python3"] 
-CMD ["StreetGalleryATX/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
