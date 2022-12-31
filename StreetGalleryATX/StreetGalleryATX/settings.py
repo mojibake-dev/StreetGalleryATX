@@ -75,9 +75,21 @@ WSGI_APPLICATION = 'StreetGalleryATX.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
+        # 'ENGINE': 'django.db.backends.mysql' instead of the following.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DB_IP'),
+        'PORT': '5432',
+        # 'OPTIONS': {
+        #     'sslmode': 'require',
+        #     'sslcert': os.getenv('CLIENT_CERT'),
+        #     'sslkey': os.getenv('CLIENT_KEY'),
+        #     'sslrootcert': os.getenv('SERVER_CA'),
     }
+
 }
 
 
