@@ -102,6 +102,42 @@ spec:
             gcr.io/marine-airfoil-372121/github_serendipitous-secure_streetgalleryatx
           imagePullPolicy: IfNotPresent
           name: streetgalleryatx-sha256-1
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: AppUserName
+                  key: AppUserName
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: AppUserPass
+                  key: AppUserPass
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: database
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: database-ip
+                  key: database-ip
+            - name: CLIENT_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: client-cert
+                  key: client-cert
+            - name: CLIENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: client-key
+                  key: client-key
+            - name: SERVER_CA
+              valueFrom:
+                secretKeyRef:
+                  name: server-ca
+                  key: server-ca
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
