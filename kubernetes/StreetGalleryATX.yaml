@@ -106,13 +106,13 @@ spec:
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: AppUserName
-                  key: AppUserName
+                  name: appuser
+                  key: appuser
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: AppUserPass
-                  key: AppUserPass
+                  name: apppass
+                  key: appass
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
