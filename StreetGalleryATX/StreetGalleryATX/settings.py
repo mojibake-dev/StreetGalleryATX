@@ -85,17 +85,11 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_IP'),
         'PORT': '5432',
 
-        # 'NAME': os.getenv('DATABASE_NAME'),
-        # 'USER': os.getenv('DATABASE_USER'),
-        # 'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        # 'HOST': os.getenv('DATABASE_IP'),
-        # 'PORT': '5432',
-
-        # 'OPTIONS': {
-        #     'sslmode': 'require',
-        #     'sslcert': os.getenv('CLIENT_CERT'),
-        #     'sslkey': os.getenv('CLIENT_KEY'),
-        #     'sslrootcert': os.getenv('SERVER_CA'),
+        'OPTIONS': {
+            'sslmode': 'require',
+            'sslcert': os.getenv('CLIENT_CERT'),
+            'sslkey': os.getenv('CLIENT_KEY'),
+            'sslrootcert': os.getenv('SERVER_CA'),
     }
 
 }

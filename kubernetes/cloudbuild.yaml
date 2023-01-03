@@ -121,6 +121,26 @@ spec:
                 secretKeyRef:
                   name: cloudsql
                   key: host                  
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql
+                  key: database
+            - name: CLIENT_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsqlcert
+                  key: client-cert
+            - name: CLIENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsqlcert
+                  key: client-key
+            - name: SERVER_CA
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsqlcert
+                  key: server-ca 
 
         # - image: gcr.io/cloudsql-docker/gce-proxy:1.16
         #   name: cloudsql-proxy
