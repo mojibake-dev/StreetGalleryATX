@@ -101,6 +101,52 @@ spec:
             gcr.io/marine-airfoil-372121/github.com/serendipitous-secure/streetgalleryatx
           imagePullPolicy: IfNotPresent
           name: streetgalleryatx-sha256-1
+          env:
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: database-db-name
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: sql-app-user
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: sql-app-user
+            - name: DATABASE_IP
+              valueFrom:
+                secretKeyRef:
+                  name: default
+                  key: database-host                  
+        ports:
+        - containerPort: 8080
+
+      - image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        name: cloudsql-proxy
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances=<your-cloudsql-connection-string>=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+          - name: ssl-certs
+            mountPath: /etc/ssl/certs
+          - name: cloudsql
+            mountPath: /cloudsql
+      volumes:
+        - name: cloudsql-oauth-credentials
+          secret:
+            secretName: cloudsql-oauth-credentials
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+        - name: cloudsql
+          emptyDir: {}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
