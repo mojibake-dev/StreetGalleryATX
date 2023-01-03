@@ -85,12 +85,12 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_IP'),
         'PORT': '5432',
 
-        'OPTIONS': {
-            'sslmode': 'require',
-            'sslcert': os.getenv('CLIENT_CERT', 'client_key.key'),
-            'sslkey': os.getenv('CLIENT_KEY', 'client_cert_chain.crt'),
-            'sslrootcert': os.getenv('SERVER_CA', 'ca.crt'),
-        }
+        # 'OPTIONS': {
+        #     'sslmode': 'require',
+        #     'sslcert': os.getenv('CLIENT_CERT', 'client_key.key'),
+        #     'sslkey': os.getenv('CLIENT_KEY', 'client_cert_chain.crt'),
+        #     'sslrootcert': os.getenv('SERVER_CA', 'ca.crt'),
+        # }
     }
 }
 
