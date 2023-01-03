@@ -122,31 +122,31 @@ spec:
                 secretKeyRef:
                   name: default
                   key: database-host                  
-        ports:
-        - containerPort: 8080
+          ports:
+          - containerPort: 80
 
-      - image: gcr.io/cloudsql-docker/gce-proxy:1.16
-        name: cloudsql-proxy
-        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                  "-instances=<your-cloudsql-connection-string>=tcp:5432",
-                  "-credential_file=/secrets/cloudsql/credentials.json"]
-        volumeMounts:
+        - image: gcr.io/cloudsql-docker/gce-proxy:1.16
+          name: cloudsql-proxy
+          command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                    "-instances=<your-cloudsql-connection-string>=tcp:5432",
+                    "-credential_file=/secrets/cloudsql/credentials.json"]
+          volumeMounts:
+            - name: cloudsql-oauth-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+            - name: ssl-certs
+              mountPath: /etc/ssl/certs
+            - name: cloudsql
+              mountPath: /cloudsql
+        volumes:
           - name: cloudsql-oauth-credentials
-            mountPath: /secrets/cloudsql
-            readOnly: true
+            secret:
+              secretName: cloudsql-oauth-credentials
           - name: ssl-certs
-            mountPath: /etc/ssl/certs
+            hostPath:
+              path: /etc/ssl/certs
           - name: cloudsql
-            mountPath: /cloudsql
-      volumes:
-        - name: cloudsql-oauth-credentials
-          secret:
-            secretName: cloudsql-oauth-credentials
-        - name: ssl-certs
-          hostPath:
-            path: /etc/ssl/certs
-        - name: cloudsql
-          emptyDir: {}
+            emptyDir: {}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
