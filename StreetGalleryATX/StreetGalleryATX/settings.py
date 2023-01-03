@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': os.getenv('DATABASE_NAME'),
         'USER': os.getenv('DATABASE_USER'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DB_IP'),
+        'HOST': os.getenv('DATABASE_IP'),
         'PORT': '5432',
         # 'OPTIONS': {
         #     'sslmode': 'require',
