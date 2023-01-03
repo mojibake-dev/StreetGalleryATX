@@ -104,23 +104,23 @@ spec:
             - name: DATABASE_NAME
               valueFrom:
                 secretKeyRef:
-                  name: default
-                  key: database-db-name
+                  name: cloudsql
+                  key: database
             - name: DATABASE_USER
               valueFrom:
                 secretKeyRef:
-                  name: default
-                  key: sql-app-user
+                  name: cloudsql
+                  key: username
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: default
-                  key: sql-app-user
+                  name: cloudsql
+                  key: password
             - name: DATABASE_IP
               valueFrom:
                 secretKeyRef:
-                  name: default
-                  key: database-host                  
+                  name: cloudsql
+                  key: host                  
 
         # - image: gcr.io/cloudsql-docker/gce-proxy:1.16
         #   name: cloudsql-proxy
