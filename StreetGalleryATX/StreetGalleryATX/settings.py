@@ -87,9 +87,9 @@ DATABASES = {
 
         'OPTIONS': {
             'sslmode': 'require',
-            'sslcert': os.getenv('CLIENT_CERT', 'client-cert.pem'),
-            'sslkey': os.getenv('CLIENT_KEY', 'client-key.pem'),
-            'sslrootcert': os.getenv('SERVER_CA', 'server-ca.pem' ),
+            'sslcert': os.getenv('CLIENT_CERT', 'client_key.key'),
+            'sslkey': os.getenv('CLIENT_KEY', 'client_cert_chain.crt'),
+            'sslrootcert': os.getenv('SERVER_CA', 'ca.crt'),
         }
     }
 }
