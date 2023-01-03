@@ -90,8 +90,8 @@ DATABASES = {
             'sslcert': os.getenv('CLIENT_CERT'),
             'sslkey': os.getenv('CLIENT_KEY'),
             'sslrootcert': os.getenv('SERVER_CA'),
+        }
     }
-
 }
 
 
