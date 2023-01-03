@@ -97,8 +97,7 @@ spec:
         app: streetgalleryatx-dev
     spec:
       containers:
-        - image: >-
-            gcr.io/marine-airfoil-372121/github.com/serendipitous-secure/streetgalleryatx
+        - image: gcr.io/marine-airfoil-372121/github.com/serendipitous-secure/streetgalleryatx
           imagePullPolicy: IfNotPresent
           name: streetgalleryatx-sha256-1
           env:
@@ -123,30 +122,30 @@ spec:
                   name: default
                   key: database-host                  
           ports:
-          - containerPort: 80
+        #   - containerPort: 80
 
-        - image: gcr.io/cloudsql-docker/gce-proxy:1.16
-          name: cloudsql-proxy
-          command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                    "-instances=<your-cloudsql-connection-string>=tcp:5432",
-                    "-credential_file=/secrets/cloudsql/credentials.json"]
-          volumeMounts:
-            - name: cloudsql-oauth-credentials
-              mountPath: /secrets/cloudsql
-              readOnly: true
-            - name: ssl-certs
-              mountPath: /etc/ssl/certs
-            - name: cloudsql
-              mountPath: /cloudsql
-        volumes:
-          - name: cloudsql-oauth-credentials
-            secret:
-              secretName: cloudsql-oauth-credentials
-          - name: ssl-certs
-            hostPath:
-              path: /etc/ssl/certs
-          - name: cloudsql
-            emptyDir: {}
+        # - image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        #   name: cloudsql-proxy
+        #   command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+        #             "-instances=<your-cloudsql-connection-string>=tcp:5432",
+        #             "-credential_file=/secrets/cloudsql/credentials.json"]
+        #   volumeMounts:
+        #     - name: cloudsql-oauth-credentials
+        #       mountPath: /secrets/cloudsql
+        #       readOnly: true
+        #     - name: ssl-certs
+        #       mountPath: /etc/ssl/certs
+        #     - name: cloudsql
+        #       mountPath: /cloudsql
+        # volumes:
+        #   - name: cloudsql-oauth-credentials
+        #     secret:
+        #       secretName: cloudsql-oauth-credentials
+        #   - name: ssl-certs
+        #     hostPath:
+        #       path: /etc/ssl/certs
+        #   - name: cloudsql
+        #     emptyDir: {}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
