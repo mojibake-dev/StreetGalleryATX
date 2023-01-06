@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from io import StringIO
 import os
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,17 +76,19 @@ WSGI_APPLICATION = 'StreetGalleryATX.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-ClientCert = StringIO()
-ClientCert.write(os.getenv('CLIENT_CERT'))
-#ClientCert.close()
+# ClientCert = StringIO()
+# ClientCert.write(os.getenv('CLIENT_CERT'))
+# #ClientCert.close()
 
-ClientKey = StringIO()
-ClientKey.write(os.getenv('CLIENT_KEY'))
-#ClientKey.close()
+# ClientKey = StringIO()
+# ClientKey.write(os.getenv('CLIENT_KEY'))
+# #ClientKey.close()
 
-ServerCA = StringIO()
-ServerCA.write(os.getenv('SERVER_CA'))
-#ServerCA.close()
+# ServerCA = StringIO()
+# ServerCA.write(os.getenv('SERVER_CA'))
+# #ServerCA.close()
+
+logging.debug(os.getenv('CLIENT_CERT'))
 
 DATABASES = {
     'default': {
