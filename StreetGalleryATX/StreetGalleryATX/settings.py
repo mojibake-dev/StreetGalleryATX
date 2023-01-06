@@ -77,15 +77,15 @@ WSGI_APPLICATION = 'StreetGalleryATX.wsgi.application'
 
 ClientCert = StringIO()
 ClientCert.write(os.getenv('CLIENT_CERT'))
-ClientCert.close()
+#ClientCert.close()
 
 ClientKey = StringIO()
 ClientKey.write(os.getenv('CLIENT_KEY'))
-ClientKey.close()
+#ClientKey.close()
 
 ServerCA = StringIO()
 ServerCA.write(os.getenv('SERVER_CA'))
-ServerCA.close()
+#ServerCA.close()
 
 DATABASES = {
     'default': {
