@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from io import StringIO
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-(a_(1!x&rrzvwg=gl1zfk$l#89(e6x8il__i^r0u#b0%6&+o*+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.172.61.99']
+ALLOWED_HOSTS = ['34.170.16.53']
 
 
 # Application definition
@@ -74,6 +75,18 @@ WSGI_APPLICATION = 'StreetGalleryATX.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+ClientCert = StringIO()
+ClientCert.write(os.getenv('CLIENT_CERT'))
+ClientCert.close()
+
+ClientKey = StringIO()
+ClientKey.write(os.getenv('CLIENT_KEY'))
+ClientKey.close()
+
+ServerCA = StringIO()
+ServerCA.write(os.getenv('SERVER_CA'))
+ServerCA.close()
+
 DATABASES = {
     'default': {
         # If you are using Cloud SQL for MySQL rather than PostgreSQL, set
@@ -85,12 +98,12 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_IP'),
         'PORT': '5432',
 
-        # 'OPTIONS': {
-        #     'sslmode': 'require',
-        #     'sslcert': os.getenv('CLIENT_CERT', 'client_key.key'),
-        #     'sslkey': os.getenv('CLIENT_KEY', 'client_cert_chain.crt'),
-        #     'sslrootcert': os.getenv('SERVER_CA', 'ca.crt'),
-        # }
+        'OPTIONS': {
+            'sslmode': 'verify-full',
+            'sslcert': ClientCert,
+            'sslkey': ClientKey,
+            'sslrootcert': ServerCA
+        }
     }
 }
 
