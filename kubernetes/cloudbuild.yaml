@@ -142,28 +142,28 @@ spec:
                   name: cloudsqlcert
                   key: server-ca
 
-      - image: gcr.io/cloudsql-docker/gce-proxy:1.16
-        name: cloudsql-proxy
-        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                  "-instances=marine-airfoil-372121:us-central1:gallery-dev=tcp:5432",
-                  "-credential_file=/secrets/cloudsql/credentials.json"]
-        volumeMounts:
-          - name: cloudsql-oauth-credentials
-            mountPath: /secrets/cloudsql
-            readOnly: true
-          - name: ssl-certs
-            mountPath: /etc/ssl/certs
-          - name: cloudsql
-            mountPath: /cloudsql
-      volumes:
-        - name: cloudsql-oauth-credentials
-          secret:
-            secretName: cloudsql-oauth-credentials
-        - name: ssl-certs
-          hostPath:
-            path: /etc/ssl/certs
-        - name: cloudsql
-          emptyDir: {}
+      # - image: gcr.io/cloudsql-docker/gce-proxy:1.16
+      #   name: cloudsql-proxy
+      #   command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+      #             "-instances=marine-airfoil-372121:us-central1:gallery-dev=tcp:5432",
+      #             "-credential_file=/secrets/cloudsql/credentials.json"]
+      #   volumeMounts:
+      #     - name: cloudsql-oauth-credentials
+      #       mountPath: /secrets/cloudsql
+      #       readOnly: true
+      #     - name: ssl-certs
+      #       mountPath: /etc/ssl/certs
+      #     - name: cloudsql
+      #       mountPath: /cloudsql
+      # volumes:
+      #   - name: cloudsql-oauth-credentials
+      #     secret:
+      #       secretName: cloudsql-oauth-credentials
+      #   - name: ssl-certs
+      #     hostPath:
+      #       path: /etc/ssl/certs
+      #   - name: cloudsql
+      #     emptyDir: {}
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -226,7 +226,7 @@ metadata:
   name: streetgalleryatx-dev-hpa-oplf
   namespace: default
 spec:
-  maxReplicas: 2
+  maxReplicas: 3
   metrics:
     - resource:
         name: cpu
