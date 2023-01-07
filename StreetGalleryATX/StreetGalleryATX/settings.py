@@ -101,12 +101,12 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_IP'),
         'PORT': '5432',
 
-        'OPTIONS': {
-            'sslmode': 'verify-full',
-            'sslcert': ClientCert,
-            'sslkey': ClientKey,
-            'sslrootcert': ServerCA
-        }
+        # 'OPTIONS': {
+        #     'sslmode': 'verify-full',
+        #     'sslcert': ClientCert,
+        #     'sslkey': ClientKey,
+        #     'sslrootcert': ServerCA
+        # }
     }
 }
 
