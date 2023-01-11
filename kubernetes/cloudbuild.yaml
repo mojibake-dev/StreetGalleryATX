@@ -126,10 +126,10 @@ spec:
               secretKeyRef:
                 name: cloudsql
                 key: database
-          volumeMounts:
-            - name: bucket-oauth-credentials
-              mountPath: /secrets/bucketcredentials
-              readOnly: true
+        volumeMounts:
+          - name: bucket-oauth-credentials
+            mountPath: /secrets/bucketcredentials
+            readOnly: true
 
       - image: gcr.io/cloudsql-docker/gce-proxy:1.16
         name: cloudsql-proxy
