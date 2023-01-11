@@ -126,15 +126,6 @@ spec:
               secretKeyRef:
                 name: cloudsql
                 key: database
-        volumeMounts:
-          - name: bucket-oauth-credentials
-            mountPath: /secrets/bucketcredentials
-            readOnly: true
-      volumes:
-        - name: bucket-oauth-credentials
-          secret:
-            secretName: bucket-oauth-credentials
-            - key: bucketcredentials.json
 
       - image: gcr.io/cloudsql-docker/gce-proxy:1.16
         name: cloudsql-proxy
@@ -149,6 +140,10 @@ spec:
             mountPath: /etc/ssl/certs
           - name: cloudsql
             mountPath: /cloudsql
+          - name: bucket-oauth-credentials
+            mountPath: /secrets/bucketcredentials
+            readOnly: true
+            
       volumes:
         - name: cloudsql-oauth-credentials
           secret:
@@ -158,6 +153,10 @@ spec:
             path: /etc/ssl/certs
         - name: cloudsql
           emptyDir: {}
+        - name: bucket-oauth-credentials
+          secret:
+            secretName: bucket-oauth-credentials
+            - key: bucketcredentials.json
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
