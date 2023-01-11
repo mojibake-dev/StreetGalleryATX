@@ -156,7 +156,7 @@ spec:
         - name: bucket-oauth-credentials
           secret:
             secretName: bucket-oauth-credentials
-            - key: bucketcredentials.json
+
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
