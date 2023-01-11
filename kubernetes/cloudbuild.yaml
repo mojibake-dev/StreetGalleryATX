@@ -126,21 +126,15 @@ spec:
               secretKeyRef:
                 name: cloudsql
                 key: database
-          - name: CLIENT_CERT
-            valueFrom:
-              secretKeyRef:
-                name: cloudsqlcert
-                key: client-cert
-          - name: CLIENT_KEY
-            valueFrom:
-              secretKeyRef: 
-                name: cloudsqlcert
-                key: client-key
-          - name: SERVER_CA
-            valueFrom:
-              secretKeyRef:
-                name: cloudsqlcert
-                key: server-ca
+        volumeMounts:
+          - name: bucket-oauth-credentials
+            mountPath: /secrets/bucketcredentials
+            readOnly: true
+      volumes:
+        - name: bucket-oauth-credentials
+          secret:
+            secretName: bucket-oauth-credentials
+            - key: bucketcredentials.json
 
       - image: gcr.io/cloudsql-docker/gce-proxy:1.16
         name: cloudsql-proxy
